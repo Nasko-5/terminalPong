@@ -1,7 +1,5 @@
-﻿
 using cetest;
 using Mindmagma.Curses;
-using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 
 
@@ -34,6 +32,8 @@ namespace curses0
             // @@@@@@@@@]]]]]]]]]======-------v-v-v-[    MENU SETUP & OBJECT INITIALIZATION    ]-v-v-v-------======||||[[[[[@@@@@@@@@
 
             Render mainView = new(Window);
+
+            mainView.AddObject(new Square("Border", 0, 0, maxX, maxY, false, outlinePattern: " .:-=+=-:. "));
 
             // Effect init
 
@@ -76,7 +76,7 @@ namespace curses0
 
             var oponent = gameView.AddObject(new Square("Oponent", maxX - 2, (maxY / 2) - 2, 1, 6, true, fillChar: '@', outlinePattern:"@"));
 
-            var ball = gameView.AddObject(new Square("Ball", maxX / 2, maxY / 2, 1, 1, true, fillChar:'@', outlinePattern:"@"));
+            var ball = gameView.AddObject(new Square("Ball", (maxX / 2)-1, (maxY / 2)-1, 1, 1, true, fillChar:'@', outlinePattern:"@"));
 
             // collision, win areas
 
@@ -87,6 +87,8 @@ namespace curses0
             var oponentWinArea = gameView.AddObject(new Square("OponentWinArea", maxX, 0, 0, maxY, false, outlinePattern:"#"));
 
             // graphics
+
+            var border = gameView.AddObject(new Square("Border", 0, 0, maxX, maxY, false, outlinePattern: " .:-=+=-:. "));
 
             var sepratorLine = gameView.AddObject(new Square("SepratorLine", maxX / 2, 0, 0, maxY, false, outlinePattern:"| "));
             gameView.MoveToBottom(sepratorLine);
@@ -127,8 +129,8 @@ namespace curses0
                     //break;
                 }
 
-                effectXspeed = (effectXspeed + (0.03 - mainEffectSpeedOffset)) % 360;
-                effectYspeed = (effectYspeed + (0.08 - mainEffectSpeedOffset)) % 360;
+                effectXspeed = (effectXspeed + (0.03 - mainEffectSpeedOffset)) % 12.5;
+                effectYspeed = (effectYspeed + (0.08 - mainEffectSpeedOffset)) % 12.5;
 
                 for (int point = 0; point <= 8; point++)
                 {
@@ -155,6 +157,7 @@ namespace curses0
                 Thread.Sleep(5);
             }
 
+            gameView.RenderObjects();
             Thread.Sleep(100);
 
             // - GAME -
@@ -219,7 +222,7 @@ namespace curses0
                 // pc logic
                 
                 int positionError = ((ball.YPosition + ball.Height) / 2) - ((oponent.YPosition + oponent.Height) / 2);     
-                if (oponent.YPosition + positionError >= 1 && rand.Next(0, 101) <= 80)
+                if (oponent.YPosition + positionError >= 1 && rand.Next(0, 101) <= 100)
                 {
                     oponent.YPosition += positionError >= 0 ? 1 : -1;
                     
@@ -228,10 +231,10 @@ namespace curses0
                     oponent.YPosition += positionError >= 0 ? -1 : 1;
                 }
 
-                if (oponent.YPosition < 1)
+                if (oponent.YPosition < 0)
                 {
                     oponent.YPosition += 1;
-                } else if (oponent.YPosition > maxY - 1)
+                } else if (oponent.YPosition + oponent.Height > maxY - 1)
                 {
                     oponent.YPosition -= 1;
                 }
