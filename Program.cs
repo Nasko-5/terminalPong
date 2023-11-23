@@ -77,7 +77,7 @@ namespace curses0
 
             var oponent = gameView.AddObject(new Square("Oponent", maxX - 2, (maxY / 2) - 2, 1, 6, true, fillChar: '@', outlinePattern: "@"));
 
-            var ball = gameView.AddObject(new Square("Ball", (maxX / 2) - 1, (maxY / 2) - 1, 1, 1, true, fillChar: '@', outlinePattern: "@"));
+            var ball = gameView.AddObject(new Square("Ball", (maxX / 2) - 1 , (maxY / 2) - 1, 1, 1, true, fillChar: '@', outlinePattern: "@"));
 
             // collision, win areas
 
@@ -166,8 +166,8 @@ namespace curses0
             }
 
             
-            gameView.RenderObjects();
-            Thread.Sleep(500);
+            //gameView.RenderObjects();
+            //Thread.Sleep(500);
 
             // - GAME -
             while (running)
@@ -232,7 +232,7 @@ namespace curses0
                 // pc logic
 
                 int positionError = ((ball.YPosition + ball.Height) / 2) - ((oponent.YPosition + oponent.Height) / 2);
-                if (oponent.YPosition + positionError >= 1 && rand.Next(0, 101) <= 57.4)
+                if (oponent.YPosition + positionError >= 1 && rand.Next(0, 101) <= 78)
                 {
                     oponent.YPosition += positionError >= 0 ? 1 : -1;
 
