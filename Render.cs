@@ -1,5 +1,4 @@
 ﻿using Mindmagma.Curses;
-using System.Runtime.CompilerServices;
 
 namespace curses0;
 
@@ -51,7 +50,7 @@ public class Render
     /// <param name="obj"></param>
     public void MoveUp<T>(T obj) where T : IRenderable
     {
-        int i =  objectList.IndexOf(obj);
+        int i = objectList.IndexOf(obj);
 
         if (i + 1 < objectList.Count)
         {
@@ -98,7 +97,7 @@ public class Render
 
         NCurses.Clear();
 
-        foreach (var o in toRender) 
+        foreach (var o in toRender)
         {
             o.XPosition = ((o.XPosition % maxX) + maxX) % maxX;
             o.YPosition = ((o.YPosition % maxY) + maxY) % maxY;
@@ -137,5 +136,5 @@ public class Render
         return $"Rendering currently:\n{string.Join('\n', toRender.Select(a => $"  {toRender.IndexOf(a)}.{a.GetType()} {a.ID} - X:{a.XPosition} Y:{a.YPosition}"))}";
     }
 
-   
+
 }

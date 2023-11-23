@@ -26,7 +26,7 @@ public class Drawing
 
     public static void VerticalLine(IntPtr Window, int x, int y, int length, char c)
     {
-        for (int i = 0; i < length+1; i++)
+        for (int i = 0; i < length + 1; i++)
         {
             Utils.PutChar(Window, 1, y + (i * Math.Sign(i)), x, c);
         }

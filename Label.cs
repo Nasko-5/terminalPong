@@ -124,7 +124,7 @@ public unsafe class Label : IRenderable
                 //      4 < 2  finally! we're at the end, L - J is finally smaller, and gets picked over S
                 //
                 //      this means we split off the remaining two characters
-                */      
+                */
                 outList.Add(line.Substring(j, Math.Min(Width, line.Length - j)));
             }
         }
@@ -159,7 +159,7 @@ public unsafe class Label : IRenderable
     /// </summary>
     public byte Alignment { get; set; }
 
-    private string[] parsed = new string[]{};
+    private string[] parsed = new string[] { };
     private string previousText = "";
     /// <summary>
     /// The text inside the label

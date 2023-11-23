@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace curses0;
+﻿namespace curses0;
 public unsafe class Square : IRenderable
 {
     /// <summary>

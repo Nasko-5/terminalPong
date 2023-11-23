@@ -18,7 +18,7 @@ namespace curses0
             NCurses.Raw();                                  // Disables buffering and control characters 
             NCurses.Keypad(Window, enable: true);           // Enables keypad (function keys, arrow keys, etc...)
             NCurses.NoEcho();                               // Disables echo
-            
+
 
             int maxX, maxY;
             NCurses.GetMaxYX(Window, out maxY, out maxX);
@@ -33,7 +33,7 @@ namespace curses0
 
             Render mainView = new(Window);
 
-            mainView.AddObject(new Square("Border", 0, 0, maxX, maxY, false, outlinePattern: " .:-=+=-:. "));
+            //mainView.AddObject(new Square("Border", 0, 0, maxX, maxY, false, outlinePattern: " .:-=+=-:. "));
 
             // Effect init
 
@@ -58,7 +58,7 @@ namespace curses0
 
             // other elements
 
-            var mainMenuGameName = mainView.AddObject(new Label("gamName", (maxX / 2) - 29/2, (maxY / 2) - 1, 29, 2, "- - -=#| terminal |#=- - -\n \nP      O      N      G", alignment: 1));
+            var mainMenuGameName = mainView.AddObject(new Label("gamName", (maxX / 2) - 29 / 2, (maxY / 2) - 1, 29, 2, "- - -=#| terminal |#=- - -\n \nP      O      N      G", alignment: 1));
 
 
 
@@ -70,30 +70,30 @@ namespace curses0
             Render gameView = new(Window);
 
             // movement
-            var player = gameView.AddObject(new Square("Player", 1, (maxY / 2 ) - 2, 1, 6, true, fillChar: '@', outlinePattern:"@"));
+            var player = gameView.AddObject(new Square("Player", 1, (maxY / 2) - 2, 1, 6, true, fillChar: '@', outlinePattern: "@"));
             bool yDirection = false;
             bool xDirection = false;
 
-            var oponent = gameView.AddObject(new Square("Oponent", maxX - 2, (maxY / 2) - 2, 1, 6, true, fillChar: '@', outlinePattern:"@"));
+            var oponent = gameView.AddObject(new Square("Oponent", maxX - 2, (maxY / 2) - 2, 1, 6, true, fillChar: '@', outlinePattern: "@"));
 
-            var ball = gameView.AddObject(new Square("Ball", (maxX / 2)-1, (maxY / 2)-1, 1, 1, true, fillChar:'@', outlinePattern:"@"));
+            var ball = gameView.AddObject(new Square("Ball", (maxX / 2) - 1, (maxY / 2) - 1, 1, 1, true, fillChar: '@', outlinePattern: "@"));
 
             // collision, win areas
 
-            var topCollider = gameView.AddObject(new Square("TopCollider", 0, 0, maxX, 0, false, outlinePattern:"#"));
+            var topCollider = gameView.AddObject(new Square("TopCollider", 0, 0, maxX, 0, false, outlinePattern: "#"));
             var bottomCollider = gameView.AddObject(new Square("BottomCollider", 0, maxY, maxX, 0, false, outlinePattern: "#"));
 
-            var playerWinArea = gameView.AddObject(new Square("PlayerWinArea", 0, 0, 0, maxY, false, outlinePattern:"#"));
-            var oponentWinArea = gameView.AddObject(new Square("OponentWinArea", maxX, 0, 0, maxY, false, outlinePattern:"#"));
+            var playerWinArea = gameView.AddObject(new Square("PlayerWinArea", 0, 0, 0, maxY, false, outlinePattern: "#"));
+            var oponentWinArea = gameView.AddObject(new Square("OponentWinArea", maxX, 0, 0, maxY, false, outlinePattern: "#"));
 
             // graphics
 
-            var border = gameView.AddObject(new Square("Border", 0, 0, maxX, maxY, false, outlinePattern: " .:-=+=-:. "));
+            //var border = gameView.AddObject(new Square("Border", 0, 0, maxX, maxY, false, outlinePattern: " .:-=+=-:. "));
 
-            var sepratorLine = gameView.AddObject(new Square("SepratorLine", maxX / 2, 0, 0, maxY, false, outlinePattern:"| "));
+            var sepratorLine = gameView.AddObject(new Square("SepratorLine", maxX / 2, 0, 0, maxY, false, outlinePattern: "| "));
             gameView.MoveToBottom(sepratorLine);
 
-            var playerScoreLabel = gameView.AddObject(new Label("PlayerScore", (maxX/2)-15, 2, 10, 1, "0", alignment:2));
+            var playerScoreLabel = gameView.AddObject(new Label("PlayerScore", (maxX / 2) - 15, 2, 10, 1, "0", alignment: 2));
             var oponentScoreLabel = gameView.AddObject(new Label("OponentScore", (maxX / 2) + 6, 2, 10, 1, "0", alignment: 0));
 
             int playerScore = 0;
@@ -106,7 +106,7 @@ namespace curses0
 
             int speed = 50;
 
-            var winMessage = gameView.AddObject(new Label("WinMessage", (maxX/2)-(22/2)+1, (maxY/2)-1, 22, 2, "", alignment:1));
+            var winMessage = gameView.AddObject(new Label("WinMessage", (maxX / 2) - (22 / 2) + 1, (maxY / 2) - 1, 22, 2, "", alignment: 1));
             winMessage.Show = false;
 
             // @@@@@@@@@]]]]]]]]]======-------^-^-^----------------------------------------------^-^-^-------======||||[[[[[@@@@@@@@@
@@ -135,8 +135,8 @@ namespace curses0
                 for (int point = 0; point <= 8; point++)
                 {
                     IRenderable o = mainView.GetRenderableObject($"P{point + 1}");
-                    o.XPosition = (int)Math.Round(Math.Sin(effectXspeed + (0.2 * point)) * ((mainEffectSize + 25))/effectEndVal) + maxX / 2;
-                    o.YPosition = (int)Math.Round(Math.Cos(effectYspeed + (0.2 * point)) * (mainEffectSize)/effectEndVal) + maxY / 2;
+                    o.XPosition = (int)Math.Round(Math.Sin(effectXspeed + (0.2 * point)) * ((mainEffectSize + 25)) / effectEndVal) + maxX / 2;
+                    o.YPosition = (int)Math.Round(Math.Cos(effectYspeed + (0.2 * point)) * (mainEffectSize) / effectEndVal) + maxY / 2;
 
                     if (effectEnd)
                     {
@@ -147,7 +147,8 @@ namespace curses0
                 if (effectEndVal >= 10)
                 {
                     break;
-                } else if (effectEndVal >= 5)
+                }
+                else if (effectEndVal >= 5)
                 {
                     p1.Width = 1;
                     p1.Height = 1;
@@ -164,11 +165,12 @@ namespace curses0
             while (running)
             {
                 // user input
-                if (Utils.IsKeyPressed((int)ConsoleKey.A)) {
+                if (Utils.IsKeyPressed((int)ConsoleKey.A))
+                {
                     player.YPosition -= 1;
                     collided = Collide.CollidesWithBottom(player, topCollider);
                     player.YPosition += 1 * Unsafe.As<bool, int>(ref collided);
-            
+
                 }
                 if (Utils.IsKeyPressed((int)ConsoleKey.D))
                 {
@@ -190,7 +192,7 @@ namespace curses0
                 {
                     oponentScore++;
                     resetGame(ball, player, oponent, xDirection, yDirection, maxX, maxY, rand);
-                    
+
                     winMessage.ShowToggle();
                     winMessage.Text = "Oponent scored!\n+1 point to oponent.";
                     gameView.RenderObjects();
@@ -203,7 +205,7 @@ namespace curses0
                 {
                     playerScore++;
                     resetGame(ball, player, oponent, xDirection, yDirection, maxX, maxY, rand);
-                    
+
                     winMessage.ShowToggle();
                     winMessage.Text = "Player scored!\n+1 point to player.";
                     gameView.RenderObjects();
@@ -214,19 +216,20 @@ namespace curses0
                 }
                 oponentScoreLabel.Text = oponentScore.ToString();
                 playerScoreLabel.Text = playerScore.ToString();
-                
+
                 // ball movement
                 ball.XPosition += 1 * (xDirection ? 1 : -1);
                 ball.YPosition += 1 * (yDirection ? 1 : -1);
 
                 // pc logic
-                
-                int positionError = ((ball.YPosition + ball.Height) / 2) - ((oponent.YPosition + oponent.Height) / 2);     
+
+                int positionError = ((ball.YPosition + ball.Height) / 2) - ((oponent.YPosition + oponent.Height) / 2);
                 if (oponent.YPosition + positionError >= 1 && rand.Next(0, 101) <= 100)
                 {
                     oponent.YPosition += positionError >= 0 ? 1 : -1;
-                    
-                } else
+
+                }
+                else
                 {
                     oponent.YPosition += positionError >= 0 ? -1 : 1;
                 }
@@ -234,13 +237,14 @@ namespace curses0
                 if (oponent.YPosition < 0)
                 {
                     oponent.YPosition += 1;
-                } else if (oponent.YPosition + oponent.Height > maxY - 1)
+                }
+                else if (oponent.YPosition + oponent.Height > maxY - 1)
                 {
                     oponent.YPosition -= 1;
                 }
 
                 gameView.RenderObjects();
-           
+
                 Thread.Sleep(Math.Clamp(speed, 15, int.MaxValue));
             }
 

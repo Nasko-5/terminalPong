@@ -7,7 +7,7 @@ internal class Utils
     public static void PutString(IntPtr Window, byte mode, int y, int x, string str)
     {
         int maxY, maxX;
-        NCurses.GetMaxYX(Window,out maxY, out maxX);
+        NCurses.GetMaxYX(Window, out maxY, out maxX);
         switch (mode)
         {
             case 0:
@@ -47,7 +47,8 @@ internal class Utils
                     }
                     break;
             }
-        } catch { }      
+        }
+        catch { }
     }
 
     // funny dll import, also probably what's causing the virus warning :(
@@ -58,7 +59,7 @@ internal class Utils
         short state = GetKeyState(key);
         return (state & 128) != 0;
     }
-     
+
     //  GetKeyState returns an 8 bit number, with the last bit
     //  indicating if the key of the keycode given is pressed or not
     //  10101101 - pressed  00101101 - not pressed
