@@ -61,6 +61,7 @@ namespace curses0
             var mainMenuGameName = mainView.AddObject(new Label("gamName", (maxX / 2) - 29 / 2, (maxY / 2) - 1, 29, 2, "- - -=#| terminal |#=- - -\n \nP      O      N      G", alignment: 1));
 
 
+            var mainMenuInstuctions = mainView.AddObject( new Label("Instructions", (maxX / 2)-51/2, maxY-4, 51, 2, "=| Space - start | F1 - Quit | A - Up | D - Down |=", alignment:1));
 
             // @@@@@@@@@]]]]]]]]]======-------^-^-^----------------------------------------------^-^-^-------======||||[[[[[@@@@@@@@@
 
@@ -118,6 +119,7 @@ namespace curses0
                 {
                     effectEnd = true;
                     mainMenuGameName.Show = false;
+                    mainMenuInstuctions.Show = false;
                     p9.ShowToggle();
                     p8.ShowToggle();
                     p7.ShowToggle();
@@ -127,6 +129,11 @@ namespace curses0
                     p3.ShowToggle();
                     p2.ShowToggle();
                     //break;
+                }
+
+                if (Utils.IsKeyPressed((int)ConsoleKey.F1))
+                {
+                    return;
                 }
 
                 effectXspeed = (effectXspeed + (0.03 - mainEffectSpeedOffset)) % 12.5;
@@ -158,8 +165,9 @@ namespace curses0
                 Thread.Sleep(5);
             }
 
+            
             gameView.RenderObjects();
-            Thread.Sleep(100);
+            Thread.Sleep(500);
 
             // - GAME -
             while (running)
@@ -224,7 +232,7 @@ namespace curses0
                 // pc logic
 
                 int positionError = ((ball.YPosition + ball.Height) / 2) - ((oponent.YPosition + oponent.Height) / 2);
-                if (oponent.YPosition + positionError >= 1 && rand.Next(0, 101) <= 100)
+                if (oponent.YPosition + positionError >= 1 && rand.Next(0, 101) <= 57.4)
                 {
                     oponent.YPosition += positionError >= 0 ? 1 : -1;
 
