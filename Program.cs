@@ -1,4 +1,4 @@
-using cetest;
+using cetest.engine;
 using Mindmagma.Curses;
 using System.Runtime.CompilerServices;
 
